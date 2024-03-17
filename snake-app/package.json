@@ -9,6 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/p5": "^1.7.6",
     "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "p5": "^1.9.0",
+    "typescript": "^5.4.2"
   }
 }

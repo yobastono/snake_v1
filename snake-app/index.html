@@ -4,10 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script> -->
     <title>Vite App</title>
   </head>
+  <style>
+    #app {
+      width: fit-content;
+      height: fit-content;
+      overflow: hidden; /* Hide scrollbars */
+    }
+    canvas {
+      border: 1px solid black; /* Optional: Add border for visualization */
+    }
+  </style>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div id="app">
+    </div>
+    <script type="module" src="/sketch.ts"></script>
+    <script type="module" src="/main.ts"></script>
   </body>
 </html>
