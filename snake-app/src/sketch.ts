@@ -79,10 +79,8 @@ export const sketch = new p5((pArg: p5) => {
     shiftSnake();
     renderSnake();
     eat();
-    console.log("snakes", snakes);
-
+    dead();
   
-
     // for (var x = 0; x < p.width; x += p.width / 20) {
     //   for (var y = 0; y < p.height; y += p.height / 20) {
     //     p.stroke(0);
@@ -116,24 +114,50 @@ function renderFood() {
   }
 }
 
+enum Direction {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT
+}
+
+let direction;
+
 function snakeDirection() {
   switch(p.keyCode) {
     case p.UP_ARROW:
-      snakes[0].y -= SPEED;
+      if (direction !== Direction.DOWN) {
+        direction = Direction.UP;
+        snakes[0].y -= SPEED;
+      } else {
+        snakes[0].y += SPEED;
+      }
       break;
     case p.DOWN_ARROW:
-      snakes[0].y += SPEED;
+      if (direction !== Direction.UP) {
+        direction = Direction.DOWN;
+        snakes[0].y += SPEED;
+      } else {
+        snakes[0].y -= SPEED;
+      }
       break;
     case p.LEFT_ARROW:
-      snakes[0].x -= SPEED;
+      if (direction !== Direction.RIGHT) {
+        direction = Direction.LEFT;
+        snakes[0].x -= SPEED;
+      } else {
+        snakes[0].x += SPEED;
+      }
     break;
     case p.RIGHT_ARROW:
-      snakes[0].x += SPEED;
+      if (direction !== Direction.LEFT) {
+        direction = Direction.RIGHT;
+        snakes[0].x += SPEED;
+      } else {
+        snakes[0].x -= SPEED;
+      }
     break;
   }
-
-
-  const lastSnakeItem = snakes[snakes.length -1];
 
 }
 
@@ -144,10 +168,6 @@ let prev = {
 
 function shiftSnake() {
   snakes.forEach((snake, index) => {
-    if (index > 0) {
-      //prev.x = snakes[index-1].x;
-      //prev.y = snakes[index-1].y;
-    }
     if (index === 0) {
       prev.x = snake.x;
       prev.y = snake.y;
@@ -165,5 +185,17 @@ function shiftSnake() {
 
 function createRandomNumber() {
   return Math.floor(Math.random() * 20) * 20;
+}
+
+function dead() {
+    for (let i = 0; i < snakes.length; i++) {
+      for (let j = i + 1; j < snakes.length; j++) {
+        if (snakes[i].x === snakes[j].x && snakes[i].y === snakes[j].y) {
+          console.log("game over")
+          return true;
+        }
+      }
+      return false;
+    }
 }
  
