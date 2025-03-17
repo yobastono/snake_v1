@@ -101,7 +101,6 @@ function eat() {
 }
 
 function renderSnake() {
-  // Maybe change the color
   p.fill('#00FF00')
   snakes.forEach((snake) => {
       p.rect(snake.x, snake.y, 20, 20);
